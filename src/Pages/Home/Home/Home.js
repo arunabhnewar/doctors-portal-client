@@ -5,6 +5,7 @@ import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
 import Banner from '../Banner/Banner';
 import Blog from '../Blog/Blog';
 import Contact from '../Contact/Contact';
+import Doctors from '../Doctors/Doctors';
 import Information from '../Information/Information';
 import Reviews from '../Reviews/Reviews';
 import Services from '../Services/Services';
@@ -19,6 +20,7 @@ const Home = () => {
             <Services />
             <About />
             <AppointmentBanner />
+            <Doctors />
             <Reviews />
             <Blog />
             <Contact />
