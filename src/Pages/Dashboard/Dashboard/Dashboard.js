@@ -16,13 +16,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import DashboardHome from '../DashboardHome/DashboardHome';
-import MakeAdmin from '../MakeAdmin/MakeAdmin';
-import AddDoctor from '../AddDoctor/AddDoctor';
+import { Outlet, Link } from "react-router-dom";
 import useAuth from '../../../hooks/useAuth';
-import AdminRoute from '../../Login/AdminRoute/AdminRoute';
-import Payment from '../Payment/Payment';
+
 
 const drawerWidth = 200;
 
@@ -30,7 +26,6 @@ function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    let { path, url } = useRouteMatch();
     const { admin } = useAuth();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -44,15 +39,15 @@ function Dashboard(props) {
             <Link to="/appointment" style={{ textDecoration: 'none', color: 'white' }}>
                 <Button color="inherit">Appointment</Button>
             </Link>
-            <Link to={`${url}`} style={{ textDecoration: 'none', color: 'white' }}>
+            <Link to="/dashboard" style={{ textDecoration: 'none', color: 'white' }}>
                 <Button color="inherit">Dashboard</Button>
             </Link>
 
             {admin && <Box>
-                <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none', color: 'white' }}>
+                <Link to={`/dashboard/makeAdmin`} style={{ textDecoration: 'none', color: 'white' }}>
                     <Button color="inherit">Make Admin</Button>
                 </Link>
-                <Link to={`${url}/addDoctor`} style={{ textDecoration: 'none', color: 'white' }}>
+                <Link to={`/dashboard/addDoctor`} style={{ textDecoration: 'none', color: 'white' }}>
                     <Button color="inherit">Add Doctor</Button>
                 </Link>
             </Box>}
@@ -134,21 +129,7 @@ function Dashboard(props) {
             >
                 <Toolbar />
 
-                <Switch>
-                    <Route exact path={path}>
-                        <DashboardHome />
-                    </Route>
-                    <Route path={`${path}/payment/:appointmentId`}>
-                        <Payment />
-                    </Route>
-                    <AdminRoute path={`${path}/makeAdmin`}>
-                        <MakeAdmin />
-                    </AdminRoute>
-                    <AdminRoute path={`${path}/addDoctor`}>
-                        <AddDoctor />
-                    </AdminRoute>
-                </Switch>
-
+                <Outlet></Outlet>
             </Box>
         </Box>
     );
